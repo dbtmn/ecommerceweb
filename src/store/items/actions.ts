@@ -1,28 +1,29 @@
 import axios, { AxiosError } from "axios";
+import { NUMBER_OF_PRODUCT_PER_PAGE } from "../../constants";
 import { FETCH_ITEMS_REQUEST, FETCH_ITEMS_SUCCESS, FETCH_ITEMS_FAILURE, FETCH_ITEMS_BY_FILTER_REQUEST } from "./actionTypes";
 import { Item, FetchItemsRequest, FetchItemsByFilterRequest, FetchItemsSuccessPayload, FetchItemsSuccess, FetchItemsFailurePayload, FetchItemsFailure } from "./types";
-import { FilterState } from "../filters/types";
+import { FilterState, SortType, OrderType } from "../filters/types";
 import { store } from "../../index";
 
-export const getItems = () =>
-    axios.get<Item[]>("http://localhost:3001/items");
+const getItems = () =>
+    axios.get<Item[]>(`http://localhost:3001/items?_page=1&_limit=16&_sort=price&_order=asc`);
 
-const getItemsByFilter = (activePage: number, sortType: string, orderType: string, companies: string, tags: string, itemType: string) => {
-    return axios.get<Item[]>(`http://localhost:3001/items?_page=${activePage}&_limit=16&_sort=${sortType}&_order=${orderType || 'asc'}${companies || ''}${tags || ''}${itemType || ''}`).then(result => result);
+const getItemsByFilter = (activePage: number, sortType: SortType, orderType: OrderType, companies: string, tags: string, itemType: string) => {
+    return axios.get<Item[]>(`http://localhost:3001/items?_page=${activePage}&_limit=${NUMBER_OF_PRODUCT_PER_PAGE}&_sort=${sortType}&_order=${orderType || 'asc'}${companies || ''}${tags || ''}${itemType || ''}`).then(result => result);
 }
 
-export const fetchItems = () => async (/* dispatch: DispatchItemsType, dispatchFilter: DispatchFiltersType */ dispatch: any) => {
+// dispatch: DispatchItemsType | DispatchFiltersType
+export const fetchItems = () => async (dispatch: any) => {
     try {
         dispatch(fetchItemsRequest());
         return getItems().then((items: any) => {
-            dispatch(fetchItemsSuccess({ items: items.data }))
-            const totalPageCount = Math.ceil(items.data.length / 16 /* NUMBER_OF_PRODUCT_PER_PAGE */);
+            let totalCount = items.headers.get("X-Total-Count");
+            dispatch(fetchItemsSuccess({ items: items.data }));
+            const totalPage = Math.ceil(totalCount / NUMBER_OF_PRODUCT_PER_PAGE);
             dispatch({
                 type: "SET_TOTAL_PAGE",
-                totalPage: totalPageCount
+                totalPage
             });
-            // dispatch(fetchItemsFailure({ error: "(err as AxiosError).message" }));
-
         });
     } catch (err) {
         dispatch(fetchItemsFailure({ error: (err as AxiosError).message }));
@@ -30,7 +31,8 @@ export const fetchItems = () => async (/* dispatch: DispatchItemsType, dispatchF
     }
 }
 
-export const fetchItemsByFilter = () => async (/* dispatch: DispatchItemsType, dispatchFilter: DispatchFiltersType */ dispatch: any) => {
+// dispatch: DispatchItemsType | DispatchFiltersType
+export const fetchItemsByFilter = () => async (dispatch: any) => {
     try {
         const filters: FilterState = store.getState().filters;
         let brandsQueryParams = "";
@@ -44,14 +46,15 @@ export const fetchItemsByFilter = () => async (/* dispatch: DispatchItemsType, d
             return tagsQueryParams = tagsQueryParams.concat(`${tagConcatField}${tagItem}`);
         });
         const itemTypeQueryParam = filters.itemType.length > 0 ? `&itemType=${filters.itemType}` : '';
+        
         dispatch(fetchItemsRequest());
-
-        return getItemsByFilter(filters.activePage, filters.sortType, filters.orderType, brandsQueryParams, tagsQueryParams, itemTypeQueryParam).then((items) => {
+        return getItemsByFilter(filters.activePage, filters.sortType, filters.orderType, brandsQueryParams, tagsQueryParams, itemTypeQueryParam).then((items: any) => {
+            let totalCount = items.headers.get("X-Total-Count");;
             dispatch(fetchItemsSuccess({ items: items.data }));
-            const totalPageCount = Math.ceil(items.data.length / 16 /* NUMBER_OF_PRODUCT_PER_PAGE */);
+            const totalPage = Math.ceil(totalCount / NUMBER_OF_PRODUCT_PER_PAGE);
             dispatch({
                 type: "SET_TOTAL_PAGE",
-                totalPage: totalPageCount
+                totalPage
             })
         })
 

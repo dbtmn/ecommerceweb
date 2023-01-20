@@ -7,13 +7,11 @@ const getCompanies = async () => {
     return axios.get<Company[]>("http://localhost:3001/companies");
 }
 
-export const fetchCompanies = () => async (/*dispatch: any*/ dispatch: DispatchCompaniesType) => {
+export const fetchCompanies = () => async (dispatch: DispatchCompaniesType) => {
     try {
         dispatch(fetchCompaniesRequest());
         return getCompanies().then((companies) => {
             dispatch(fetchCompaniesSuccess({ companies: companies.data }));
-            // dispatch(fetchCompaniesFailure({ error: "(err as AxiosError).message" }));
-
         });
     } catch (err) {
         dispatch(fetchCompaniesFailure({ error: (err as AxiosError).message }));

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { setOrder, setActivePage } from "../../store/filters/actions";
 import { fetchItemsByFilter } from "../../store/items/actions";
-
+import { SortType, OrderType } from "../../store/filters/types";
 import AreaTitle from "../../components/AreaTitle";
 import RadioButtonGroup from "../../components/RadioButtonGroup";
 
@@ -13,7 +13,7 @@ import './index.scss';
 interface DispatchProps {
     fetchItemsByFilter: () => Promise<void>;
     setActivePage: (activePage: number) => void;
-    setOrder: (sortType: string, orderType: string) => void;
+    setOrder: (sortType: SortType, orderType: OrderType) => void;
 }
 
 const sortingItems = [
@@ -39,24 +39,24 @@ const SortingArea: React.FunctionComponent<DispatchProps> = (props) => {
     };
 
     const clickPrice = (clickValue: string) => {
-        const sortType = clickValue === sortingItems[0].name ? 'asc' : 'desc';
+        const sortType: OrderType = clickValue === sortingItems[0].name ? OrderType.asc : OrderType.desc;
         handleSortingByPrice(sortType);
     };
 
     const clickDate = (clickValue: string) => {
-        const sortType = clickValue === sortingItems[2].name ? 'asc' : 'desc';
+        const sortType: OrderType = clickValue === sortingItems[2].name ? OrderType.asc : OrderType.desc;
         handleSortingByDate(sortType);
     }
 
-    const handleSortingByDate = (orderType: string) => {
+    const handleSortingByDate = (orderType: OrderType) => {
         setActivePage(1);
-        setOrder('added', orderType);
+        setOrder(SortType.added, orderType);
         fetchItemsByFilter();
     };
 
-    const handleSortingByPrice = (orderType: string) => {
+    const handleSortingByPrice = (orderType: OrderType) => {
         setActivePage(1);
-        setOrder('price', orderType);
+        setOrder(SortType.price, orderType);
         fetchItemsByFilter();
     }
 

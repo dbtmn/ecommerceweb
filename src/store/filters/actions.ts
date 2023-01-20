@@ -9,6 +9,8 @@ import {
     DELETE_TAG,
   } from "./actionTypes";
   import {
+    SortType,
+    OrderType,
     SetOrder,
     SetBrand,
     SetItemType,
@@ -19,7 +21,7 @@ import {
     DeleteTag
   } from "./types";
   
-  export const setOrder = (sortType: string, orderType: string): SetOrder => ({
+  export const setOrder = (sortType: SortType, orderType: OrderType): SetOrder => ({
     type: SET_ORDER,
     sortType,
     orderType

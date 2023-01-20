@@ -9,11 +9,11 @@ import {
   DELETE_TAG
 } from "./actionTypes";
 
-import { FilterActions, FilterState } from "./types";
+import { SortType, OrderType, FilterActions, FilterState } from "./types";
 
 const initialState: FilterState = {
-  sortType: 'price',
-  orderType: 'asc',
+  sortType: SortType.price,
+  orderType: OrderType.asc,
   itemType: '',
   brand: [],
   activePage: 1,
@@ -63,7 +63,6 @@ const filtersReducer = (state = initialState, action: FilterActions) => {
     case DELETE_TAG:
       const indexTag = state.tag.indexOf(action.tag);
       state.tag.splice(indexTag, 1);
-      console.log("DELETE_TAG", state.tag);
       return {
         ...state,
       };
