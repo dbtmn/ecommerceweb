@@ -1,0 +1,74 @@
+$border-width: 0.15em;
+$radio-button-size: 1.5em;
+
+.radio-button {
+    &-wrapper {
+        label {
+            display: flex;
+            align-items: center;
+            height: 6vh;
+            cursor: pointer;
+
+            input[type="radio"] {
+                -webkit-appearance: none;
+                appearance: none;
+                position: relative;
+                cursor: pointer;
+                width: $radio-button-size;
+                height: $radio-button-size;
+                border-radius: 50%;
+                margin-right: 1em;
+                margin-left: 0;
+
+                border: $border-width solid #dfdee2;
+                outline: none;
+
+                &:checked {
+                    position: relative;
+                    border-color: #1ea4ce;
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        width: 50%;
+                        height: 50%;
+                        margin: 0.3em;
+                        border-radius: 50%;
+                        background: #1ea4ce;
+                    }
+                }
+
+                &:not(:disabled)::after {
+                    box-sizing: border-box;
+                    content: "";
+                    position: absolute;
+                    right: -12px;
+                    bottom: -12px;
+                    left: -12px;
+                    top: -12px;
+                    border-radius: 50%;
+                    border-width: 30px;
+                    border-color: transparent;
+                    background-color: transparent;
+                    border-style: solid;
+                    transition: unset;
+                }
+
+                &:hover::after {
+                    transition: border-width 0.5s cubic-bezier(0.39, 0.575, 0.565, 1),
+                        border-color 0.5s cubic-bezier(0.39, 0.575, 0.565, 1);
+                    border-width: 0;
+                    border-color: #e5e5e5;
+                }
+            }
+        }
+    }
+
+    &-text {
+        width: 65%;
+        font-family: "Open Sans";
+        font-weight: normal;
+        font-size: 14px;
+        color: #525252;
+    }
+}

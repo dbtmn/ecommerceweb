@@ -1,0 +1,82 @@
+$border-width: 0.15em;
+$checkbox-size: 1.5em;
+
+.checkbox {
+    &-wrapper {
+        label {
+            display: flex;
+            align-items: center;
+            height: 6vh;
+            cursor: pointer;
+
+            input[type="checkbox"] {
+                -webkit-appearance: none;
+                appearance: none;
+                position: relative;
+                cursor: pointer;
+                width: $checkbox-size;
+                height: $checkbox-size;
+                border-radius: 0.15em;
+                margin-right: 1em;
+                margin-left: 0;
+
+                border: $border-width solid #dfdee2;
+                outline: none;
+
+                &:checked {
+                    position: relative;
+                    background-color: #1ea4ce;
+                    border-color: #1ea4ce;
+
+                    &::before {
+                        content: "\2714";
+                        font-size: 1.5em;
+                        color: #fff;
+                        position: absolute;
+                        right: 1px;
+                        top: -5px;
+                    }
+                }
+
+                &:not(:disabled)::after {
+                    box-sizing: border-box;
+                    content: "";
+                    position: absolute;
+                    right: -12px;
+                    bottom: -12px;
+                    left: -12px;
+                    top: -12px;
+                    border-radius: 50%;
+                    border-width: 30px;
+                    border-color: transparent;
+                    background-color: transparent;
+                    border-style: solid;
+                    transition: unset;
+                }
+
+                &:hover::after {
+                    transition: border-width 0.5s cubic-bezier(0.39, 0.575, 0.565, 1),
+                        border-color 0.5s cubic-bezier(0.39, 0.575, 0.565, 1);
+                    border-width: 0;
+                    border-color: #e5e5e5;
+                }
+            }
+        }
+
+        &[class*="disabled"] {
+            opacity: 0.5;
+
+            label, input:disabled {
+                cursor: default;
+            }
+        }
+    }
+
+    &-text {
+        width: 65%;
+        font-family: "Open Sans";
+        font-weight: normal;
+        font-size: 14px;
+        color: #525252;
+    }
+}

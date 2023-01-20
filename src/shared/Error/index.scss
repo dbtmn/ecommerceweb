@@ -1,0 +1,27 @@
+.error {
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        padding-top: 0.2vw;
+        padding-right: 1.7vw;
+        padding-bottom: 1.25vw;
+        padding-left: 1.7vw;
+    }
+
+    &-icon {
+        margin-right: 1.8vw;
+        color: red;
+
+        &--small {
+            font-size: 24px;
+        }
+
+        &--medium {
+            font-size: 36px;
+        }
+
+        &--large {
+            font-size: 48px;
+        }
+    }
+}

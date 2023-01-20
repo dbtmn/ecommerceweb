@@ -1,0 +1,29 @@
+.header {
+    &__logo {
+        display: flex;
+        justify-content: center;
+        flex-grow: 1;
+    }
+
+    &__shopping-basket {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #147594;
+        padding: 1.7vw;
+        margin-right: 5.5vw;
+
+        &-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 1.8vw;
+            color: #fff;
+        }
+        &-cost {
+            font-family: "Open Sans";
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 18px;
+        }
+    }
+}

@@ -1,0 +1,21 @@
+.sorting-area {
+    &__radio {
+        &-label {
+            .MuiFormControlLabel-label {
+                font-family: "Open Sans";
+                font-weight: normal;
+                font-size: 14px;
+                color: #525252;
+            }
+        }
+
+        &-group {
+            padding-top: 1.25vw;
+            padding-right: 0.7vw;
+            padding-bottom: 1.25vw;
+            padding-left: 2.45vw;
+            background-color: #fff;
+            width: 11.2vw;
+        }
+    }
+}
