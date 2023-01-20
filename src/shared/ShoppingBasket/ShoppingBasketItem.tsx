@@ -12,11 +12,12 @@ interface ShoppingBasketSubItemProps {
 
 const ShoppingBasketSubItem: React.FunctionComponent<ShoppingBasketSubItemProps> = (props) => {
     const { shoppingBasketProduct, addQuantity, subtractQuantity } = props;
+    const { name, subPrice, slug, quantity } = shoppingBasketProduct
 
     return <div className="shopping-basket__wrapper">
         <div className="shopping-basket__information">
-            <div className="shopping-basket__name">{shoppingBasketProduct.name}</div>
-            <div className="shopping-basket__price">{`₺${shoppingBasketProduct.subPrice}`}</div>
+            <div className="shopping-basket__name">{name}</div>
+            <div className="shopping-basket__price">{`₺${subPrice}`}</div>
         </div>
         <div className="shopping-basket__controls">
             <Button className="product-list-item__decrement" variant="text" sx={{
@@ -28,11 +29,11 @@ const ShoppingBasketSubItem: React.FunctionComponent<ShoppingBasketSubItemProps>
                 textTransform: 'none',
                 marginRight: '0.5vw'
             }}
-                onClick={() => subtractQuantity(shoppingBasketProduct.slug)}>
+                onClick={() => subtractQuantity(slug)}>
                 -
             </Button>
             <div className="shopping-basket__quantity">
-                {shoppingBasketProduct.quantity}
+                {quantity}
             </div>
             <Button className="product-list-item__increment" variant="text" sx={{
                 height: '2.08vw',
@@ -43,7 +44,7 @@ const ShoppingBasketSubItem: React.FunctionComponent<ShoppingBasketSubItemProps>
                 textTransform: 'none',
                 marginRight: '0.5vw'
             }}
-                onClick={() => addQuantity(shoppingBasketProduct.slug)}>
+                onClick={() => addQuantity(slug)}>
                 +
             </Button>
         </div>
