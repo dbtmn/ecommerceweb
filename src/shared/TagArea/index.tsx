@@ -33,7 +33,7 @@ const TagArea: React.FunctionComponent<DispatchProps & StateProps> = (props) => 
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
     const [searchedTags, setSearchedTags] = useState<string[]>([]);
 
-    const handleSelectedBrands = (tag: string) => {
+    const handleSelectedTags = (tag: string) => {
         const isSelectedTag = selectedTags.includes(tag);
 
         if (!isSelectedTag) {
@@ -49,7 +49,7 @@ const TagArea: React.FunctionComponent<DispatchProps & StateProps> = (props) => 
         }
     };
 
-    const handleSearchBrands = (searchText: string) => {
+    const handleSearchTags = (searchText: string) => {
         const results = tags.filter(tag => {
             return tag.toLocaleLowerCase().includes(searchText.toLocaleLowerCase())
         });
@@ -88,7 +88,7 @@ const TagArea: React.FunctionComponent<DispatchProps & StateProps> = (props) => 
                     variant="outlined"
                     size="small"
                     placeholder="Search tag"
-                    onChange={(e) => handleSearchBrands(e.target.value)} />
+                    onChange={(e) => handleSearchTags(e.target.value)} />
                 <div className={`tag-area__clear-wrapper ${selectedTags.length > 0 ? "clickable" : "disabled"}`}
                     onClick={resetTags}>
                     <span className="material-icons tag-area__clear-icon">
@@ -102,7 +102,7 @@ const TagArea: React.FunctionComponent<DispatchProps & StateProps> = (props) => 
                     {(searchedTags.length > 0 ? searchedTags : tags).map((tag, index) =>
                         <Checkbox
                             key={`tag-area__checkbox-${index}`}
-                            onChange={() => handleSelectedBrands(tag)}
+                            onChange={() => handleSelectedTags(tag)}
                             label={tag}
                             value={selectedTags.includes(tag)} />
                     )}
