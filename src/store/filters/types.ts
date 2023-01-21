@@ -5,6 +5,8 @@ import {
   SET_ACTIVE_PAGE,
   SET_TOTAL_PAGE,
   SET_TAG,
+  CLEAR_BRAND,
+  CLEAR_TAG,
   DELETE_BRAND,
   DELETE_TAG
 } from "./actionTypes";
@@ -60,6 +62,14 @@ export interface SetTag {
   tag: string;
 }
 
+export interface ClearBrand {
+  type: typeof CLEAR_BRAND;
+}
+
+export interface ClearTag {
+  type: typeof CLEAR_TAG;
+}
+
 export interface DeleteBrand {
   type: typeof DELETE_BRAND;
   brand: string;
@@ -72,4 +82,4 @@ export interface DeleteTag {
 
 export type DispatchFiltersType = (args?: FilterActions) => void;
 
-export type FilterActions = SetOrder | SetBrand | SetItemType | SetActivePage | SetTotalPage | SetTag | DeleteBrand | DeleteTag;
+export type FilterActions = SetOrder | SetBrand | SetItemType | SetActivePage | SetTotalPage | SetTag | ClearBrand | ClearTag | DeleteBrand | DeleteTag;

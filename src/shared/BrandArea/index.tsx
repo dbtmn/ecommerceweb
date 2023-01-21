@@ -9,7 +9,7 @@ import Loading from "../../shared/Loading";
 
 import { Company, CompanyState } from "../../store/companies/types";
 import { fetchItemsByFilter } from "../../store/items/actions";
-import { setBrand, setActivePage, deleteBrand } from "../../store/filters/actions";
+import { setBrand, setActivePage, deleteBrand, clearBrand } from "../../store/filters/actions";
 
 import "./index.scss";
 
@@ -19,6 +19,7 @@ interface DispatchProps {
     deleteBrand: (brand: string) => void;
     setActivePage: (activePage: number) => void;
     setBrand: (brand: string) => void;
+    clearBrand: () => void;
 }
 
 // props from connect mapStateToProps
@@ -27,7 +28,7 @@ interface StateProps {
 }
 
 const BrandArea: React.FunctionComponent<DispatchProps & StateProps> = (props) => {
-    const { companiesState, fetchItemsByFilter, deleteBrand, setActivePage, setBrand } = props;
+    const { companiesState, fetchItemsByFilter, deleteBrand, setActivePage, setBrand, clearBrand } = props;
     const { companies: brands, pending: isCompaniesPending, error: isCompaniesError } = companiesState;
 
     const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
@@ -67,6 +68,13 @@ const BrandArea: React.FunctionComponent<DispatchProps & StateProps> = (props) =
         setBrand(companySlug);
         fetchItemsByFilter();
     };
+
+    const resetBrands = () => {
+        setSelectedBrands([]);
+        clearBrand();
+        fetchItemsByFilter();
+    }
+
     return <>
         <AreaTitle>Brands</AreaTitle>
         <div className="brand-area__wrapper">
@@ -76,12 +84,21 @@ const BrandArea: React.FunctionComponent<DispatchProps & StateProps> = (props) =
                 <div className="brand-area__checkbox-group">
                     <TextField sx={{
                         marginTop: "1.6vw",
-                        marginBottom: "1.6vw"
+                        marginBottom: "0.8vw"
                     }}
                         id="outlined-basic"
                         variant="outlined" size="small"
                         placeholder="Search brand"
                         onChange={(e) => handleSearchBrands(e.target.value)} />
+                    <div className={`brand-area__clear-wrapper ${selectedBrands.length > 0 ? "clickable" : "disabled"}`}
+                        onClick={resetBrands}>
+                        <span className="material-icons brand-area__clear-icon">
+                            {"clear"}
+                        </span>
+                        <div className="material-icons brand-area__clear-text">
+                            Clear
+                        </div>
+                    </div>
                     <div className="brand-area__checkbox-wrapper">
                         {(searchedBrands.length > 0 ? searchedBrands : brands).map((brand, index) =>
                             <Checkbox
@@ -107,7 +124,8 @@ const mapDispatchToProps = {
     fetchItemsByFilter,
     deleteBrand,
     setActivePage,
-    setBrand
+    setBrand,
+    clearBrand
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BrandArea);

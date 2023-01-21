@@ -34,4 +34,31 @@
             background-color: #fff;
         }
     }
+
+    &__clear {
+        &-wrapper {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.1vw;
+
+            &.clickable {
+                cursor: pointer;
+            }
+
+            &.disabled {
+                pointer-events: none;
+                cursor: inherit;
+            }
+        }
+
+        &-icon,
+        &-text {
+            color: #c4c4c4;
+        }
+
+        &-text {
+            font-family: "Open Sans";
+            font-size: 13px;
+        }
+    }
 }

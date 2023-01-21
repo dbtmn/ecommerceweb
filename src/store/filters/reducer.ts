@@ -5,6 +5,8 @@ import {
   SET_ACTIVE_PAGE,
   SET_TOTAL_PAGE,
   SET_TAG,
+  CLEAR_BRAND,
+  CLEAR_TAG,
   DELETE_BRAND,
   DELETE_TAG
 } from "./actionTypes";
@@ -53,6 +55,16 @@ const filtersReducer = (state = initialState, action: FilterActions) => {
       return {
         ...state,
         tag: [...state.tag, action.tag],
+      };
+    case CLEAR_BRAND:
+      return {
+        ...state,
+        brand: []
+      };
+    case CLEAR_TAG:
+      return {
+        ...state,
+        tag: []
       };
     case DELETE_BRAND:
       const indexBrand = state.brand.indexOf(action.brand);

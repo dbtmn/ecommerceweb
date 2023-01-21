@@ -7,7 +7,7 @@ import AreaTitle from "../../components/AreaTitle";
 import Checkbox from "../../components/Checkbox";
 import Error, { ErrorSize } from "../../shared/Error";
 import Loading from "../../shared/Loading";
-import { setActivePage, setTag, deleteTag } from "../../store/filters/actions";
+import { setActivePage, setTag, deleteTag, clearTag } from "../../store/filters/actions";
 import { fetchItemsByFilter } from "../../store/items/actions";
 import { TagsState } from "../../store/tags/types";
 
@@ -19,6 +19,7 @@ interface DispatchProps {
     deleteTag: (tag: string) => void;
     setActivePage: (activePage: number) => void;
     setTag: (tag: string) => void;
+    clearTag: () => void;
 }
 
 interface StateProps {
@@ -26,7 +27,7 @@ interface StateProps {
 }
 
 const TagArea: React.FunctionComponent<DispatchProps & StateProps> = (props) => {
-    const { tagsState, fetchItemsByFilter, deleteTag, setActivePage, setTag } = props;
+    const { tagsState, fetchItemsByFilter, deleteTag, setActivePage, setTag, clearTag } = props;
     const { error: isTagsError, pending: isTagsPending, tags } = tagsState;
 
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -67,6 +68,12 @@ const TagArea: React.FunctionComponent<DispatchProps & StateProps> = (props) => 
         fetchItemsByFilter();
     }
 
+    const resetTags = () => {
+        setSelectedTags([]);
+        clearTag();
+        fetchItemsByFilter();
+    }
+
     return <>
         <AreaTitle>Tags</AreaTitle>
         <div className="tag-area__wrapper">
@@ -75,13 +82,22 @@ const TagArea: React.FunctionComponent<DispatchProps & StateProps> = (props) => 
             {tags.length > 0 && !isTagsPending && <div className="tag-area__checkbox-group">
                 <TextField sx={{
                     marginTop: "1.6vw",
-                    marginBottom: "1.6vw"
+                    marginBottom: "0.8vw"
                 }}
                     id="outlined-basic"
                     variant="outlined"
                     size="small"
                     placeholder="Search tag"
                     onChange={(e) => handleSearchBrands(e.target.value)} />
+                <div className={`tag-area__clear-wrapper ${selectedTags.length > 0 ? "clickable" : "disabled"}`}
+                    onClick={resetTags}>
+                    <span className="material-icons tag-area__clear-icon">
+                        {"clear"}
+                    </span>
+                    <div className="material-icons tag-area__clear-text">
+                        Clear
+                    </div>
+                </div>
                 <div className="tag-area__checkbox-wrapper">
                     {(searchedTags.length > 0 ? searchedTags : tags).map((tag, index) =>
                         <Checkbox
@@ -106,7 +122,8 @@ const mapDispatchToProps = {
     fetchItemsByFilter,
     deleteTag,
     setActivePage,
-    setTag
+    setTag,
+    clearTag
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TagArea);
