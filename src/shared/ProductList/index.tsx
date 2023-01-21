@@ -11,9 +11,8 @@ import Stack from '@mui/material/Stack';
 import ProductListItem from "../../components/ProductListItem";
 import Error, { ErrorSize } from "../../shared/Error";
 import Loading from "../../shared/Loading";
-import ItemTypeArea from "../ItemTypeArea";
 import { fetchItemsByFilter } from "../../store/items/actions";
-import { setItemType, setActivePage } from "../../store/filters/actions";
+import { setActivePage } from "../../store/filters/actions";
 import { addToBasket } from "../../store/shopping-basket/actions";
 import { Item, ItemState } from "../../store/items/types";
 
@@ -24,7 +23,6 @@ interface DispatchProps {
     fetchItemsByFilter: () => Promise<void>;
     addToBasket: (product: Item, slug: string) => void;
     setActivePage: (activePage: number) => void;
-    setItemType: (itemType: string) => void;
 }
 
 // props from connect mapStateToProps
@@ -45,14 +43,6 @@ class ProductList extends React.Component<ProductListProps> {
         fetchItemsByFilter();
     };
 
-    handleSelectedItemType = (itemType: string) => {
-        const { setActivePage, setItemType, fetchItemsByFilter } = this.props;
-
-        setActivePage(1);
-        setItemType(itemType);
-        fetchItemsByFilter();
-    }
-
     handleAddProductToBasket = (product: Item, slug: string) => {
         const { addToBasket } = this.props;
 
@@ -65,7 +55,6 @@ class ProductList extends React.Component<ProductListProps> {
 
         return <>
             <div className="product-list__title">Products</div>
-            <ItemTypeArea selectItemType={this.handleSelectedItemType} />
             {isItemsPending && <Loading />}
             {isItemsError && <Error size={ErrorSize.lg} />}
             {products.length > 0 && !isItemsPending &&
@@ -121,7 +110,6 @@ const mapDispatchToProps = {
     fetchItemsByFilter,
     addToBasket,
     setActivePage,
-    setItemType,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductList);

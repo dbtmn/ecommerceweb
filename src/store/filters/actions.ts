@@ -8,7 +8,8 @@ import {
   CLEAR_BRAND,
   CLEAR_TAG,
   DELETE_BRAND,
-  DELETE_TAG,
+  DELETE_ITEM_TYPE,
+  DELETE_TAG
 } from "./actionTypes";
 import {
   SortType,
@@ -22,6 +23,7 @@ import {
   ClearBrand,
   ClearTag,
   DeleteBrand,
+  DeleteItemType,
   DeleteTag
 } from "./types";
 
@@ -67,6 +69,11 @@ export const clearTag = (): ClearTag => ({
 export const deleteBrand = (brand: string): DeleteBrand => ({
   type: DELETE_BRAND,
   brand
+});
+
+export const deleteItemType = (itemType: string): DeleteItemType => ({
+  type: DELETE_ITEM_TYPE,
+  itemType
 });
 
 export const deleteTag = (tag: string): DeleteTag => ({

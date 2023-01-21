@@ -8,6 +8,7 @@ import {
   CLEAR_BRAND,
   CLEAR_TAG,
   DELETE_BRAND,
+  DELETE_ITEM_TYPE,
   DELETE_TAG
 } from "./actionTypes";
 
@@ -16,7 +17,7 @@ import { SortType, OrderType, FilterActions, FilterState } from "./types";
 const initialState: FilterState = {
   sortType: SortType.price,
   orderType: OrderType.asc,
-  itemType: '',
+  itemType: [],
   brand: [],
   activePage: 1,
   totalPage: 1,
@@ -39,7 +40,7 @@ const filtersReducer = (state = initialState, action: FilterActions) => {
     case SET_ITEM_TYPE:
       return {
         ...state,
-        itemType: action.itemType
+        itemType: [...state.itemType, action.itemType],
       };
     case SET_ACTIVE_PAGE:
       return {
@@ -69,6 +70,12 @@ const filtersReducer = (state = initialState, action: FilterActions) => {
     case DELETE_BRAND:
       const indexBrand = state.brand.indexOf(action.brand);
       state.brand.splice(indexBrand, 1);
+      return {
+        ...state,
+      };
+    case DELETE_ITEM_TYPE:
+      const indexItemType = state.brand.indexOf(action.itemType);
+      state.itemType.splice(indexItemType, 1);
       return {
         ...state,
       };

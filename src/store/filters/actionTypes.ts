@@ -8,3 +8,4 @@ export const CLEAR_BRAND = "CLEAR_BRAND";
 export const CLEAR_TAG = "CLEAR_TAG";
 export const DELETE_BRAND = "DELETE_BRAND";
 export const DELETE_TAG = "DELETE_TAG";
+export const DELETE_ITEM_TYPE = "DELETE_ITEM_TYPE";

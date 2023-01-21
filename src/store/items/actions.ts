@@ -35,27 +35,33 @@ export const fetchItems = () => async (dispatch: any) => {
 export const fetchItemsByFilter = () => async (dispatch: any) => {
     try {
         const filters: FilterState = store.getState().filters;
+        const { brand, tag, itemType } = filters;
         let brandsQueryParams = "";
         let tagsQueryParams = "";
+        let itemTypeQueryParams = "";
         let brandConcatField = "&manufacturer=";
         let tagConcatField = "&tags=";
-        filters.brand.map(brandItem => {
+        let itemTypeConcatField = "&itemType=";
+        
+        brand.map(brandItem => {
             return brandsQueryParams = brandsQueryParams.concat(`${brandConcatField}${brandItem}`);
         });
-        filters.tag.map(tagItem => {
+        tag.map(tagItem => {
             return tagsQueryParams = tagsQueryParams.concat(`${tagConcatField}${tagItem}`);
         });
-        const itemTypeQueryParam = filters.itemType.length > 0 ? `&itemType=${filters.itemType}` : '';
+        itemType.map(item => {
+            return itemTypeQueryParams = itemTypeQueryParams.concat(`${itemTypeConcatField}${item}`);
+        });
         
         dispatch(fetchItemsRequest());
-        return getItemsByFilter(filters.activePage, filters.sortType, filters.orderType, brandsQueryParams, tagsQueryParams, itemTypeQueryParam).then((items: any) => {
+        return getItemsByFilter(filters.activePage, filters.sortType, filters.orderType, brandsQueryParams, tagsQueryParams, itemTypeQueryParams).then((items: any) => {
             let totalCount = items.headers.get("X-Total-Count");;
             dispatch(fetchItemsSuccess({ items: items.data }));
             const totalPage = Math.ceil(totalCount / NUMBER_OF_PRODUCT_PER_PAGE);
             dispatch({
                 type: "SET_TOTAL_PAGE",
                 totalPage
-            })
+            });
         })
 
     } catch (err) {

@@ -8,6 +8,7 @@ import {
   CLEAR_BRAND,
   CLEAR_TAG,
   DELETE_BRAND,
+  DELETE_ITEM_TYPE,
   DELETE_TAG
 } from "./actionTypes";
 
@@ -24,7 +25,7 @@ export enum OrderType {
 export interface FilterState {
   sortType: SortType;
   orderType: OrderType;
-  itemType: string;
+  itemType: string[];
   brand: string[];
   activePage: number;
   totalPage: number;
@@ -75,6 +76,11 @@ export interface DeleteBrand {
   brand: string;
 }
 
+export interface DeleteItemType {
+  type: typeof DELETE_ITEM_TYPE;
+  itemType: string;
+}
+
 export interface DeleteTag {
   type: typeof DELETE_TAG;
   tag: string;
@@ -82,4 +88,4 @@ export interface DeleteTag {
 
 export type DispatchFiltersType = (args?: FilterActions) => void;
 
-export type FilterActions = SetOrder | SetBrand | SetItemType | SetActivePage | SetTotalPage | SetTag | ClearBrand | ClearTag | DeleteBrand | DeleteTag;
+export type FilterActions = SetOrder | SetBrand | SetItemType | SetActivePage | SetTotalPage | SetTag | ClearBrand | ClearTag | DeleteBrand | DeleteItemType | DeleteTag;

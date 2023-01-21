@@ -10,6 +10,7 @@ import { fetchTags } from "./store/tags/actions";
 
 import BrandArea from "./shared/BrandArea";
 import Header from "./shared/Header";
+import ItemTypeArea from "./shared/ItemTypeArea";
 import ProductList from "./shared/ProductList";
 import SortingArea from "./shared/SortingArea";
 import TagArea from "./shared/TagArea";
@@ -46,6 +47,7 @@ class App extends React.Component<DispatchProps> {
             <TagArea />
           </Grid>
           <Grid item xs={7} sm={6} md={6} lg={6}>
+            <ItemTypeArea />
             <ProductList />
           </Grid>
           <Grid item xs={1} sm={2} md={2} lg={2} />
