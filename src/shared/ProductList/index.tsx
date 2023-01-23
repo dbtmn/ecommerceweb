@@ -11,6 +11,7 @@ import Stack from '@mui/material/Stack';
 import ProductListItem from "../../components/ProductListItem";
 import Error, { ErrorSize } from "../../shared/Error";
 import Loading from "../../shared/Loading";
+import NoContent from "./NoContent";
 import { fetchItemsByFilter } from "../../store/items/actions";
 import { setActivePage } from "../../store/filters/actions";
 import { addToBasket } from "../../store/shopping-basket/actions";
@@ -57,7 +58,7 @@ class ProductList extends React.Component<ProductListProps> {
             <div className="product-list__title">Products</div>
             {isItemsPending && <Loading />}
             {isItemsError && <Error size={ErrorSize.lg} />}
-            {products.length > 0 && !isItemsPending &&
+            {!isItemsPending && products.length > 0 &&
                 <>
                     <Grid container className="product-list__container">
                         {products.map((product) => <Grid key={`product-list-item-${uuidv4()}`} item sx={{ px: 1, pb: 2, display: 'flex', justifyContent: 'center' }} xs={3} sm={3} md={3} lg={3}>
@@ -92,8 +93,8 @@ class ProductList extends React.Component<ProductListProps> {
                             onChange={(e, value) => this.handleChangedActivePage(value)}
                         />
                     </Stack>
-                </>
-            }
+                </>}
+            {!isItemsPending && products.length === 0 && <NoContent />}
         </>
     }
 }

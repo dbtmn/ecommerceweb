@@ -1,8 +1,29 @@
 .product-list {
-    &__container {
+    @mixin product-list-base {
         background-color: #fff;
-        padding: 10px;
         margin-top: 1.3vw;
+    }
+
+    &__container {
+        @include product-list-base;
+        
+        padding: 10px;
+    }
+
+    &__no-content {
+        @include product-list-base;
+
+        display: flex;
+        justify-items: center;
+        padding: 2.45vw;
+        font-family: "Open Sans";
+        font-weight: normal;
+        font-size: 14px;
+        color: #525252;
+    }
+
+    &__result-icon {
+        margin-right: 1.3vw;
     }
 
     &__title {
