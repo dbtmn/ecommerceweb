@@ -95,7 +95,7 @@ const BrandArea: React.FunctionComponent<DispatchProps & StateProps> = (props) =
                         <span className="material-icons brand-area__clear-icon">
                             {"clear"}
                         </span>
-                        <div className="material-icons brand-area__clear-text">
+                        <div className="brand-area__clear-text">
                             Clear
                         </div>
                     </div>

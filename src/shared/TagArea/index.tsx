@@ -94,7 +94,7 @@ const TagArea: React.FunctionComponent<DispatchProps & StateProps> = (props) => 
                     <span className="material-icons tag-area__clear-icon">
                         {"clear"}
                     </span>
-                    <div className="material-icons tag-area__clear-text">
+                    <div className="tag-area__clear-text">
                         Clear
                     </div>
                 </div>

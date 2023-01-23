@@ -20,9 +20,8 @@
         }
 
         &-cost {
-            font-family: "Open Sans";
             font-weight: 600;
-            font-size: 14px;
+            font-size: 1rem;
             line-height: 18px;
         }
     }
@@ -33,9 +32,8 @@
     }
 
     &__total {
-        font-family: "Open Sans";
         font-weight: 600;
-        font-size: 14px;
+        font-size: 1rem;
         display: flex;
         align-items: center;
         text-align: right;
@@ -64,17 +62,15 @@
     }
 
     &__name {
-        font-family: "Open Sans";
-        font-size: 14px;
+        font-size: 1rem;
         line-height: 18px;
         letter-spacing: 0.16px;
         color: #191919;
     }
 
     &__price {
-        font-family: "Open Sans";
         font-weight: 600;
-        font-size: 14px;
+        font-size: 1rem;
         line-height: 18px;
         letter-spacing: 0.16px;
         color: #1ea4ce;
