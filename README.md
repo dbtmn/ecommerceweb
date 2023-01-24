@@ -34,6 +34,7 @@ To start the app, run the following commands:
 
 - [SCSS](https://sass-lang.com/) is used for styling.
 - [Material-UI](https://mui.com/) is used for some of the UI components.
+- [Google Fonts](https://fonts.google.com/) and [Google Icons](https://fonts.google.com/icons) are used for font and icons.
 
 ### State Management
 
