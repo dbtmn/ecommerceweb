@@ -22,7 +22,7 @@ const CheckBox: React.FunctionComponent<CheckBoxProps> = (props) => {
         <div className={checkboxClassnames}>
             <label>
                 <input type="checkbox" disabled={isDisabled} checked={value} onChange={onChange} />
-                <span className="checkbox-text">{label}</span>
+                <span className="checkbox-text fw-4">{label}</span>
             </label>
         </div>
     );

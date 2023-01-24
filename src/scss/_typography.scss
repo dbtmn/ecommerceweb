@@ -1,0 +1,5 @@
+@for $size from 1 to 9 {
+    .fw-#{$size} {
+        font-weight: 100 * $size;
+    }
+}

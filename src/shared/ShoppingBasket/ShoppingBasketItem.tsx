@@ -17,7 +17,7 @@ const ShoppingBasketSubItem: React.FunctionComponent<ShoppingBasketSubItemProps>
     return <div className="shopping-basket__wrapper">
         <div className="shopping-basket__information">
             <div className="shopping-basket__name">{name}</div>
-            <div className="shopping-basket__price">{`₺${subPrice}`}</div>
+            <div className="shopping-basket__price fw-6">{`₺${subPrice}`}</div>
         </div>
         <div className="shopping-basket__controls">
             <Button className="product-list-item__decrement" variant="text" sx={{

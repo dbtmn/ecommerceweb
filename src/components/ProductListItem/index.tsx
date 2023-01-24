@@ -20,8 +20,8 @@ const ProductListItem: React.FunctionComponent<ProductListItemProps> = (props) =
             </div>
             <div className="product-list-item__details-wrapper">
                 <div className="product-list-item__text">
-                    <div className="product-list-item__price">{`₺ ${product.price}`}</div>
-                    <div className="product-list-item__name">{product.name}</div>
+                    <div className="product-list-item__price fw-7">{`₺ ${product.price}`}</div>
+                    <div className="product-list-item__name fw-6">{product.name}</div>
                 </div>
                 <div className="product-list-item__add">
                     <Button variant="contained" sx={{

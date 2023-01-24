@@ -10,7 +10,7 @@ interface AreaTitleProps {
 const AreaTitle: React.FunctionComponent<AreaTitleProps> = (props) => {
     const { className = '', children } = props;
 
-    return <h1 className={`area-title ${className}`}>
+    return <h1 className={`area-title fw-6 ${className}`}>
         {children}
     </h1>
 }

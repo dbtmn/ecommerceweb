@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createStore, applyMiddleware /*, Store */ } from "redux"
+import { legacy_createStore as createStore, applyMiddleware /*, Store */ } from "redux"
 import { Provider } from "react-redux"
 import reportWebVitals from './reportWebVitals';
 import thunk from "redux-thunk"
@@ -9,6 +9,7 @@ import App from './App';
 import rootReducer from "./store/rootReducer"
 
 import './index.css';
+import './style.scss';
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
 

@@ -34,7 +34,7 @@ const ShoppingBasket: React.FunctionComponent<ShoppingBasketProps> = (props) => 
                 <div className="material-icons shopping-basket__header-area-icon" onClick={handleOpenUserMenu}>
                     {"shopping_basket"}
                 </div>
-                <div className="shopping-basket__header-area-cost">
+                <div className="shopping-basket__header-area-cost fw-6">
                     {`₺ ${shoppingBasketTotal}`}
                 </div>
             </div>
@@ -52,7 +52,7 @@ const ShoppingBasket: React.FunctionComponent<ShoppingBasketProps> = (props) => 
                     </MenuItem>
                 ))}
                 <div className="shopping-basket__total-wrapper">
-                    <div className="shopping-basket__total">{shoppingBasketTotal}</div>
+                    <div className="shopping-basket__total fw-6">{shoppingBasketTotal}</div>
                 </div>
             </div>
             }

@@ -55,7 +55,7 @@ class ProductList extends React.Component<ProductListProps> {
         const { items: products, pending: isItemsPending, error: isItemsError } = itemsState;
 
         return <>
-            <div className="product-list__title">Products</div>
+            <div className="product-list__title fw-4">Products</div>
             {isItemsPending && <Loading />}
             {isItemsError && <Error size={ErrorSize.lg} />}
             {!isItemsPending && products.length > 0 &&

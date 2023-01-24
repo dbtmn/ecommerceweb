@@ -25,7 +25,7 @@ const RadioButton: React.FunctionComponent<RadioButtonProps> = (props) => {
         <div className={radioButtonClassnames}>
             <label>
                 <input id={id} type="radio" checked={isChecked} disabled={disabled} value={value} onChange={() => onChange(name)} />
-                <span className="radio-button-text">{label}</span>
+                <span className="radio-button-text fw-4">{label}</span>
             </label>
         </div>
     );
